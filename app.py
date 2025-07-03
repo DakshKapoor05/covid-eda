@@ -84,7 +84,7 @@ fig_age.update_layout(
 
 
 
-
+server = app.server  # ✅ Add this for Render
 # ✅ Dash instance
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 
