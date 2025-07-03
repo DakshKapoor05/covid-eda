@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
+import os
 from dash import Dash, html, dcc, Input, Output  # ✅ UPDATED IMPORTS
 
 # external CSS stylesheets
@@ -181,8 +182,8 @@ def update_graph(type):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)  # ✅ UPDATED METHOD (replaces app.run_server)
-
+    port = int(os.environ.get("PORT", 8050))  # 8050 is fallback for local dev
+    app.run(host="0.0.0.0", port=port, debug=True)
 
 
 
