@@ -1,8 +1,7 @@
+dash
+gunicorn
+pandas
+numpy
+plotly
 setuptools
 wheel
-dash
-pandas==2.0.3
-numpy==1.24.4
-plotly==6.2.0
-matplotlib==3.7.5
-seaborn==0.12.2
