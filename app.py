@@ -14,7 +14,6 @@ external_stylesheets = [
     }
 ]
 
-
 patients = pd.read_csv('IndividualDetails.csv')
 
 total = patients.shape[0]
@@ -28,7 +27,6 @@ options = [
     {'label':'Recovered','value':'Recovered'},
     {'label':'Deceased','value':'Deceased'}
 ]
-
 
 date_by_date = patients.groupby('diagnosed_date').size().reset_index(name='cases on that day')
 date_by_date['diagnosed_date'] = pd.to_datetime(date_by_date['diagnosed_date'], dayfirst=True)
@@ -62,7 +60,6 @@ fig.update_layout(
     template='plotly_white'
 )
 
-
 df_age = pd.read_csv('AgeGroupDetails.csv')
 
 fig_age = go.Figure(
@@ -83,13 +80,9 @@ fig_age.update_layout(
     template='plotly_white'
 )
 
-
-
-
 # ✅ Dash instance
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server  # ✅ Add this for Render
-
 
 app.layout=html.Div([
     html.H1('COVID-19 Data Analysis',style={'color':'#000000','text-align':'center'}),
@@ -100,7 +93,7 @@ app.layout=html.Div([
                     html.H3('Total Cases',className='text-light'),
                     html.H4(total,className='text-light')
                 ],className='card-body'),
-            ],className='card bg-danger')
+            ],className='card bg-warning')  # ✅ changed to yellow
         ],className='col-md-3'),
         html.Div([
             html.Div([
@@ -116,7 +109,7 @@ app.layout=html.Div([
                     html.H3('Recovered Cases',className='text-light'),
                     html.H4(recovered,className='text-light')
                 ],className='card-body'),
-            ],className='card bg-warning')
+            ],className='card bg-success')  # ✅ changed to green
         ],className='col-md-3'),
         html.Div([
             html.Div([
@@ -124,7 +117,7 @@ app.layout=html.Div([
                     html.H3('Deaths',className='text-light'),
                     html.H4(deaths,className='text-light')
                 ],className='card-body'),
-            ],className='card bg-success')
+            ],className='card bg-danger')  # ✅ changed to red
         ],className='col-md-3')
     ],className='row mt-4'),
 
@@ -180,11 +173,6 @@ def update_graph(type):
             'layout': go.Layout(title='State Total Count', )
         }
 
-
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8050))  # 8050 is fallback for local dev
     app.run(host="0.0.0.0", port=port, debug=True)
-
-
-
-
